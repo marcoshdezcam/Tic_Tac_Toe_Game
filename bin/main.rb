@@ -1,22 +1,22 @@
 #!/usr/bin/env ruby
-class Game < Player
+class Game 
   attr_reader :winning_coords
   attr_accessor :player1, :player2
 
   def initialize
-    @winning_coords = [[1, 2, 3][4, 5, 6][7, 8, 9][1, 4, 7][2, 5, 8][3, 6, 9][1, 5, 9][7, 5, 3]]
+    @winning_coords = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     puts 'First player; please type your name!'
     name1 = gets.chomp
-    player1 = Player.new(name1, 'O')
+    player1 = Player.new(name1, 'X')
     puts 'Second player; please type your name!'
     name2 = gets.chomp
-    player2 = Player.new(name2, 'X')
+    player2 = Player.new(name2, 'O')
 
     puts "Welcome on board #{player1.name} and #{player2.name}, let the Tic-Tac-Toe game begins!"
     puts %(Player 1: #{player1.name} has token: #{player1.token})
     puts %(Player 2: #{player2.name} has token: #{player2.token})
-    # board_positions = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    # counter = 0
+    new_board = Board.new
+    new_board.show_board
   end
 end
 
@@ -38,6 +38,7 @@ class Board
     puts "................."
     puts "| #{board_positions[6]} | | #{board_positions[7]} | | #{board_positions[8]} |"
   end
+  
 end
 
 class Player
