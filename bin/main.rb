@@ -1,17 +1,31 @@
 #!/usr/bin/env ruby
+class Game < Player
+  attr_reader :winning_coords
+  attr_accessor :player1, :player2
 
-  def player_info
-    puts "First player; please type your name!"
+  def initialize
+    @winning_coords = [[1, 2, 3][4, 5, 6][7, 8, 9][1, 4, 7][2, 5, 8][3, 6, 9][1, 5, 9][7, 5, 3]]
+    puts 'First player; please type your name!'
     name1 = gets.chomp
-    puts "Second player; please type your name!"
+    player1 = Player.new(name1, 'O')
+    puts 'Second player; please type your name!'
     name2 = gets.chomp
-    player_1 = "X"
-    player_2 = "O"
-    puts "#{name1} has '#{player_1}' symbol"
-    puts "#{name2} has '#{player_2}' symbol"
-    puts "Welcome on board #{name1} and #{name2}, let the Tic-Tac-Toe game begins!"
-    board_positions = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    counter = 0
+    player2 = Player.new(name2, 'X')
+
+    puts "Welcome on board #{player1.name} and #{player2.name}, let the Tic-Tac-Toe game begins!"
+    puts %(Player 1: #{player1.name} has token: #{player1.token})
+    puts %(Player 2: #{player2.name} has token: #{player2.token})
+    # board_positions = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    # counter = 0
+  end
+end
+
+class Board
+
+  attr_accessor :game_board
+
+  def initialize
+    @game_board = Array.new(9)
   end
 
   def show_board
@@ -24,9 +38,15 @@
     puts "................."
     puts "| #{board_positions[6]} | | #{board_positions[7]} | | #{board_positions[8]} |"
   end
+end
 
- p player_info
- p show_board
+class Player
+  attr_accessor :name, :moves, :token
 
+  def initialize(name, token)
+    @name = name
+    @token = token
+  end
+end
 
-
+TicTacToe = Game.new
