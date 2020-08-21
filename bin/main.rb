@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-class Game
+class Game 
   attr_reader :winning_coords
   attr_accessor :player1, :player2
 
@@ -17,13 +17,6 @@ class Game
     puts %(Player 2: #{player2.name} has token: #{player2.token})
     new_board = Board.new
     new_board.show_board
-  end
-
-  def play
-    while Board.check_winner == false && Board.check_draw == false
-      new_board.mark_move(5, player1.token)
-      new_board.show_board
-    end
   end
 end
 
@@ -45,7 +38,7 @@ class Board
   end
 
   def mark_move(coords, token)
-    game_board[coords] = token
+    game_board[coords - 1 ] = token
   end
 
   def check_winner
@@ -54,6 +47,15 @@ class Board
 
   def check_draw
     false
+  end
+
+  def play
+    new_board = Board.new
+    if check_draw == false && check_winner == false
+      9.times do
+       new_board.show_board
+      end
+    end
   end
 end
 
@@ -74,4 +76,4 @@ class Player
 end
 
 TicTacToe = Game.new
-TicTacToe.play
+new_board.play
