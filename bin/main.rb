@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-class Game 
+class Game
   attr_reader :winning_coords
   attr_accessor :player1, :player2
 
@@ -18,27 +18,43 @@ class Game
     new_board = Board.new
     new_board.show_board
   end
+
+  def play
+    while Board.check_winner == false && Board.check_draw == false
+      new_board.mark_move(5, player1.token)
+      new_board.show_board
+    end
+  end
 end
 
 class Board
-
   attr_accessor :game_board
 
   def initialize
-    @game_board = Array.new(9)
+    @game_board = Array.new(9, '-')
   end
 
   def show_board
-    board_positions = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     puts "Show Game Board!"
     puts "................."
-    puts "| #{board_positions[0]} | | #{board_positions[1]} | | #{board_positions[2]} |"
+    puts "| #{game_board[0]} | | #{game_board[1]} | | #{game_board[2]} |"
     puts "................."
-    puts "| #{board_positions[3]} | | #{board_positions[4]} | | #{board_positions[5]} |"
+    puts "| #{game_board[3]} | | #{game_board[4]} | | #{game_board[5]} |"
     puts "................."
-    puts "| #{board_positions[6]} | | #{board_positions[7]} | | #{board_positions[8]} |"
+    puts "| #{game_board[6]} | | #{game_board[7]} | | #{game_board[8]} |"
   end
-  
+
+  def mark_move(coords, token)
+    game_board[coords] = token
+  end
+
+  def check_winner
+    false
+  end
+
+  def check_draw
+    false
+  end
 end
 
 class Player
@@ -48,6 +64,14 @@ class Player
     @name = name
     @token = token
   end
+
+  def move
+    puts %(Use numbers from 1 to 9.)
+    puts %(#{name} next move is: )
+    move_coords = gets.chomp.to_i
+    puts move_coords
+  end
 end
 
 TicTacToe = Game.new
+TicTacToe.play
