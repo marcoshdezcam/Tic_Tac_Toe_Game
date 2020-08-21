@@ -15,7 +15,7 @@ class Game
 
   def play
     tic_tac_board = Board.new
-    tic_tac_board.show_board while tic_tac_board.check_draw == false && tic_tac_board.check_winner == false
+    tic_tac_board.show_board
   end
 end
 
@@ -23,11 +23,17 @@ class Board
   attr_accessor :game_board
 
   def initialize
-    @game_board = Array.new(3, Array.new(3))
+    @game_board = Array.new(9, '-')
   end
 
   def show_board
-    @game_board.each { |itr| puts %( | #{itr} | ) }
+    puts %(Show Game Board!)
+    puts %(.................)
+    puts %(| #{@game_board[0]} | | #{@game_board[1]} | | #{@game_board[2]} |)
+    puts %(.................)
+    puts %(| #{@game_board[3]} | | #{@game_board[4]} | | #{@game_board[5]} |)
+    puts %(.................)
+    puts %(| #{@game_board[6]} | | #{@game_board[7]} | | #{@game_board[8]} |)
   end
 
   def mark_move(coords, token)
@@ -35,11 +41,11 @@ class Board
   end
 
   def check_winner
-    false
+    true
   end
 
   def check_draw
-    false
+    true
   end
 end
 
