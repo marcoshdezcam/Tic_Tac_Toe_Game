@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 class Game
-  attr_accessor :tic_tac_board, :player1, :player2
+  attr_accessor :tic_tac_toe, :player1, :player2
 
   def initialize
-    @tic_tac_board = Board.new
+    @tic_tac_toe = Board.new
     puts %(First player; please type your name!)
     @player1 = Player.new(gets.chomp, 'X')
     puts %(Second player; please type your name!)
@@ -18,10 +18,10 @@ class Game
 
   def play
     welcome
-    @tic_tac_board.mark_player_move(@player1, @tic_tac_board.ask_player_move(@player1))
-    @tic_tac_board.show_board
-    @tic_tac_board.mark_player_move(@player2, @tic_tac_board.ask_player_move(@player2))
-    @tic_tac_board.show_board
+    @tic_tac_toe.mark_player_move(@player1, @tic_tac_toe.ask_player_move(@player1))
+    @tic_tac_toe.show_board
+    @tic_tac_toe.mark_player_move(@player2, @tic_tac_toe.ask_player_move(@player2))
+    @tic_tac_toe.show_board
   end
 end
 
