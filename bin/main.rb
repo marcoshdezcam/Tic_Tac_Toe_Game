@@ -18,12 +18,14 @@ class Game
 
   def play
     welcome
-    @tic_tac_toe.ask_player_move(@player1)
-    @tic_tac_toe.mark_player_move(@player1)
-    @tic_tac_toe.show_board
-    @tic_tac_toe.ask_player_move(@player2)
-    @tic_tac_toe.mark_player_move(@player2)
-    @tic_tac_toe.show_board
+    while @tic_tac_toe.check_winner
+      @tic_tac_toe.ask_player_move(@player1)
+      @tic_tac_toe.mark_player_move(@player1)
+      @tic_tac_toe.show_board
+      @tic_tac_toe.ask_player_move(@player2)
+      @tic_tac_toe.mark_player_move(@player2)
+      @tic_tac_toe.show_board
+    end
   end
 end
 
