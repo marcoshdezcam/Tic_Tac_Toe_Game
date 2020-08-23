@@ -44,8 +44,12 @@ class Board
   end
 
   def ask_player_move(player)
-    puts %(#{player.name}'s turn. Type a number from 1 to 9: )
+    puts %(#{player.name}'s turn. Use a number from 1 to 9: )
     player.next_move = gets.chomp.to_i
+    until player.next_move.between?(1, 9)
+      puts %(Invalid move. Only use numbres from 1 to 9. Try again: )
+      player.next_move = gets.chomp.to_i
+    end
   end
 
   def mark_player_move(player)
