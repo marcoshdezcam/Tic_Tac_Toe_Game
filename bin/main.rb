@@ -18,9 +18,11 @@ class Game
 
   def play
     welcome
-    @tic_tac_toe.mark_player_move(@player1, @tic_tac_toe.ask_player_move(@player1))
+    @tic_tac_toe.ask_player_move(@player1)
+    @tic_tac_toe.mark_player_move(@player1)
     @tic_tac_toe.show_board
-    @tic_tac_toe.mark_player_move(@player2, @tic_tac_toe.ask_player_move(@player2))
+    @tic_tac_toe.ask_player_move(@player2)
+    @tic_tac_toe.mark_player_move(@player2)
     @tic_tac_toe.show_board
   end
 end
@@ -38,9 +40,7 @@ class Board
   end
 
   def show_board
-    puts %(.................)
     @game_board.each { |itr| puts %( | #{itr[0]} | | #{itr[1]} | | #{itr[2]} |) }
-    puts %(.................)
   end
 
   def ask_player_move(player)
@@ -48,8 +48,8 @@ class Board
     player.next_move = gets.chomp.to_i
   end
 
-  def mark_player_move(player, player_move)
-    puts %(#{player.name} move is #{player_move})
+  def mark_player_move(player)
+    puts %(#{player.name} move is #{player.next_move})
   end
 
   def check_winner
