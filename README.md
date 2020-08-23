@@ -3,15 +3,11 @@
 > This project is part of the Microverse Ruby Curriculum and The Oding Project. 
 
 
-![screenshot](./app_screenshot.png)
-
 ## Built With
 
 - Ruby
 
 ## Live Demo
-
-[Live Demo Link](https://livedemo.com)
 
 ## Getting Started
 
