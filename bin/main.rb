@@ -23,21 +23,22 @@ class Board
   attr_accessor :game_board
 
   def initialize
-    @game_board = Array.new(9, '-')
+    @game_board = Array.new(3, Array.new(3))
+    @game_board = [
+      ['-', '-', '-'],
+      ['-', '-', '-'],
+      ['-', '-', '-']
+    ]
   end
 
   def show_board
     puts %(Show Game Board!)
     puts %(.................)
-    puts %(| #{@game_board[0]} | | #{@game_board[1]} | | #{@game_board[2]} |)
-    puts %(.................)
-    puts %(| #{@game_board[3]} | | #{@game_board[4]} | | #{@game_board[5]} |)
-    puts %(.................)
-    puts %(| #{@game_board[6]} | | #{@game_board[7]} | | #{@game_board[8]} |)
+    @game_board.each { |itr| puts %( | #{itr[0]} | | #{itr[1]} | | #{itr[2]} |) }
   end
 
   def mark_move(coords, token)
-    game_board[coords] = token
+    @game_board[coords] = token
   end
 
   def check_winner
