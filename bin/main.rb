@@ -53,7 +53,7 @@ class Board
       player.next_move = gets.chomp.to_i
     end
     until player.next_move.between?(1, 9)
-      puts %(Invalid move. Only use numbres bwteen 1 and 9. Try again: )
+      puts %(Invalid move. Only use numbres between 1 and 9. Try again: )
       player.next_move = gets.chomp.to_i
     end
   end
