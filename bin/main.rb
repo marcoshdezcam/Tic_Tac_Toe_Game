@@ -22,13 +22,13 @@ class Game
       @tic_tac_toe.ask_move(@player1)
       @tic_tac_toe.mark_move(@player1)
       @tic_tac_toe.show_board
-      @tic_tac_toe.draw?
-      @tic_tac_toe.winner?(player1)
+      @tic_tac_toe.draw?(player1)
+      @tic_tac_toe.winner?(@player2)
       @tic_tac_toe.ask_move(@player2)
       @tic_tac_toe.mark_move(@player2)
       @tic_tac_toe.show_board
-      @tic_tac_toe.draw?
-      @tic_tac_toe.winner?(player1)
+      @tic_tac_toe.draw?(player2)
+      @tic_tac_toe.winner?(@player2)
     end
   end
 end
@@ -79,8 +79,8 @@ class Board
     false
   end
 
-  def draw?
-    if @slots_taken.size == 9
+  def draw?(player)
+    if @slots_taken.size == 9 && !winner?(player)
       puts %(It's a draw!)
       true
     end
