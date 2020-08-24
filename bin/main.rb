@@ -18,13 +18,17 @@ class Game
 
   def play
     welcome
-    until @tic_tac_toe.winner?(player1) || @tic_tac_toe.winner?(player2)
+    loop do
       @tic_tac_toe.ask_move(@player1)
       @tic_tac_toe.mark_move(@player1)
       @tic_tac_toe.show_board
+      @tic_tac_toe.draw?
+      @tic_tac_toe.winner?(player1)
       @tic_tac_toe.ask_move(@player2)
       @tic_tac_toe.mark_move(@player2)
       @tic_tac_toe.show_board
+      @tic_tac_toe.draw?
+      @tic_tac_toe.winner?(player1)
     end
   end
 end
@@ -71,6 +75,14 @@ class Board
         puts %(#{player.name} won!)
         return true
       end
+    end
+    false
+  end
+
+  def draw?
+    if @slots_taken.size == 9
+      puts %(It's a draw!)
+      true
     end
     false
   end
