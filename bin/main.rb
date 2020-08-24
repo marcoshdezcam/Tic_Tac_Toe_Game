@@ -30,10 +30,10 @@ class Game
 end
 
 class Board
-  attr_reader :winning_coords
-  attr_accessor :game_board
+  attr_accessor :game_board, :slots_taken
 
   def initialize
+    @slots_taken = []
     @game_board = [
       [' ', ' ', ' '],
       [' ', ' ', ' '],
@@ -48,14 +48,15 @@ class Board
   def ask_move(player)
     puts %(#{player.name}'s turn. Use a number between 1 and 9: )
     player.next_move = gets.chomp.to_i
-    while marked?
+    while marked?(player)
       puts %(Slot already taken! Choose a different number.)
       player.next_move = gets.chomp.to_i
     end
     until player.next_move.between?(1, 9)
-      puts %(Invalid move. Only use numbres between 1 and 9. Try again: )
+      puts %(Invalid move. Only use numbres bwteen 1 and 9. Try again: )
       player.next_move = gets.chomp.to_i
     end
+    @slots_taken << player.next_move
   end
 
   def mark_move(player)
@@ -68,8 +69,8 @@ class Board
     false
   end
 
-  def marked?
-    false
+  def marked?(player)
+    @slots_taken.include?(player.next_move)
   end
 end
 
@@ -79,7 +80,7 @@ class Player
   def initialize(name, token)
     @name = name
     @next_move = []
-    @moves = [[]]
+    @moves = []
     @token = token
   end
 
