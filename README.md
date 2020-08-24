@@ -2,6 +2,7 @@
 
 > This project is part of the Microverse Ruby Curriculum and The Oding Project. 
 
+[Live preview:](https://repl.it/repls/NextPersonalVirtualmachine#main.rb)
 
 ## Built With
 

@@ -67,23 +67,11 @@ class Board
 
   def winner?(player)
     @game_board.each do |itr|
-      # Horizontal winning combinations
-      # [0][0]  [0][1]  [0][2] -> 1,2,3
-      # [1][0]  [1][1]  [1][2] -> 4,5,6
-      # [2][0]  [2][1]  [2][2] -> 7,8,9
       if itr.all?(player.token)
         puts %(#{player.name} won!)
         return true
       end
     end
-    # Vertical winning combinations
-    # [0][0]  [1][0]  [2][0] -> 1,4,7
-    # [0][1]  [1][1]  [2][1] -> 2,5,8
-    # [0][2]  [1][2]  [2][2] -> 3,6,9
-
-    # Diagonal winning combinations
-    # [0][0]  [1][1]  [2][2] -> 1,5,9
-    # [0][2]  [1][1]  [2][0] -> 3,5,7
     false
   end
 
