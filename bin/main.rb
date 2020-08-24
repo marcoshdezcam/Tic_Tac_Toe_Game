@@ -48,7 +48,7 @@ class Board
   def ask_move(player)
     puts %(#{player.name}'s turn. Use a number between 1 and 9: )
     player.next_move = gets.chomp.to_i
-    unless marked?(player)
+    while marked?
       puts %(Slot already taken! Choose a different number.)
       player.next_move = gets.chomp.to_i
     end
