@@ -18,12 +18,12 @@ class Game
 
   def play
     welcome
-    while @tic_tac_toe.check_winner
-      @tic_tac_toe.ask_player_move(@player1)
-      @tic_tac_toe.mark_player_move(@player1)
+    until @tic_tac_toe.winner?
+      @tic_tac_toe.ask_move(@player1)
+      @tic_tac_toe.mark_move(@player1)
       @tic_tac_toe.show_board
-      @tic_tac_toe.ask_player_move(@player2)
-      @tic_tac_toe.mark_player_move(@player2)
+      @tic_tac_toe.ask_move(@player2)
+      @tic_tac_toe.mark_move(@player2)
       @tic_tac_toe.show_board
     end
   end
@@ -35,9 +35,9 @@ class Board
 
   def initialize
     @game_board = [
-      ['-', '-', '-'],
-      ['-', '-', '-'],
-      ['-', '-', '-']
+      [' ', ' ', ' '],
+      [' ', ' ', ' '],
+      [' ', ' ', ' ']
     ]
   end
 
@@ -45,25 +45,31 @@ class Board
     @game_board.each { |itr| puts %( | #{itr[0]} | | #{itr[1]} | | #{itr[2]} |) }
   end
 
-  def ask_player_move(player)
-    puts %(#{player.name}'s turn. Use a number from 1 to 9: )
+  def ask_move(player)
+    puts %(#{player.name}'s turn. Use a number between 1 and 9: )
     player.next_move = gets.chomp.to_i
+    while marked?
+      puts %(Slot already taken! Choose a different number.)
+      player.next_move = gets.chomp.to_i
+    end
     until player.next_move.between?(1, 9)
-      puts %(Invalid move. Only use numbres from 1 to 9. Try again: )
+      puts %(Invalid move. Only use numbres bwteen 1 and 9. Try again: )
       player.next_move = gets.chomp.to_i
     end
   end
 
-  def mark_player_move(player)
-    puts %(#{player.name} move is #{player.next_move})
+  def mark_move(player)
+    @game_board[0][player.next_move - 1] = player.token if player.next_move.between?(1, 3)
+    @game_board[1][player.next_move - 4] = player.token if player.next_move.between?(4, 6)
+    @game_board[2][player.next_move - 7] = player.token if player.next_move.between?(7, 9)
   end
 
-  def check_winner
-    true
+  def winner?
+    false
   end
 
-  def check_draw
-    true
+  def marked?
+    false
   end
 end
 
@@ -77,10 +83,7 @@ class Player
     @token = token
   end
 
-  def move
-    move_coords = gets.chomp.to_i
-    puts move_coords
-  end
+  def move(new_position); end
 end
 
 TicTacToe = Game.new
