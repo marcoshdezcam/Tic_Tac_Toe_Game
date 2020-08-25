@@ -70,35 +70,17 @@ class Board
   end
 
   def winner?(player)
-    @game_board.each do |itr|
-      if itr.all?(player.token)
-        puts %(#{player.name} won!)
-        return true
-      end
+    if [@game_board[0][0], @game_board[0][1], @game_board[0][2]].all?(player.token) ||
+       [@game_board[1][0], @game_board[1][1], @game_board[1][2]].all?(player.token) ||
+       [@game_board[2][0], @game_board[2][1], @game_board[2][2]].all?(player.token) ||
+       [@game_board[0][0], @game_board[1][0], @game_board[2][0]].all?(player.token) ||
+       [@game_board[0][1], @game_board[1][1], @game_board[2][1]].all?(player.token) ||
+       [@game_board[0][2], @game_board[1][2], @game_board[2][2]].all?(player.token) ||
+       [@game_board[0][0], @game_board[1][1], @game_board[2][2]].all?(player.token) ||
+       [@game_board[0][2], @game_board[1][1], @game_board[2][0]].all?(player.token)
+      puts "Congratulations #{player.name}, you won!"
+      true
     end
-    # column = 0
-    # @game_board.each do |itr|
-      # Diagonal winning combinations
-      # [0][0]  [1][1]  [2][2] -> 1,5,9
-      # [0][2]  [1][1]  [2][0] -> 3,5,7
-      # diagonal = []
-      # diagonal[column] = itr[column].eql?(player.token)
-      # diagonal[column] = player.token
-      # p diagonal
-      # if diagonal.size == 3 && diagonal.all?(player.token)
-      #   puts %(#{player.name} won!)
-      #   return true
-      # end
-      # column += 1
-    # end
-
-    # Vertical winning combinations
-    # @game_board.each_with_index do |itr, index|
-      # [0][0]  [1][0]  [2][0] -> 1,4,7
-      # [0][1]  [1][1]  [2][1] -> 2,5,8
-      # [0][2]  [1][2]  [2][2] -> 3,6,9
-    # end
-    false
   end
 
   def draw?(player)
