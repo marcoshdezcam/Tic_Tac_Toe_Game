@@ -22,13 +22,13 @@ class Game
       @tic_tac_toe.ask_move(@player1)
       @tic_tac_toe.mark_move(@player1)
       @tic_tac_toe.show_board
-      @tic_tac_toe.draw?(player1)
-      @tic_tac_toe.winner?(@player2)
+      @tic_tac_toe.winner?(@player1)
+      @tic_tac_toe.draw?(@player1)
       @tic_tac_toe.ask_move(@player2)
       @tic_tac_toe.mark_move(@player2)
       @tic_tac_toe.show_board
-      @tic_tac_toe.draw?(player2)
       @tic_tac_toe.winner?(@player2)
+      @tic_tac_toe.draw?(@player2)
     end
   end
 end
@@ -76,6 +76,28 @@ class Board
         return true
       end
     end
+    # column = 0
+    # @game_board.each do |itr|
+      # Diagonal winning combinations
+      # [0][0]  [1][1]  [2][2] -> 1,5,9
+      # [0][2]  [1][1]  [2][0] -> 3,5,7
+      # diagonal = []
+      # diagonal[column] = itr[column].eql?(player.token)
+      # diagonal[column] = player.token
+      # p diagonal
+      # if diagonal.size == 3 && diagonal.all?(player.token)
+      #   puts %(#{player.name} won!)
+      #   return true
+      # end
+      # column += 1
+    # end
+
+    # Vertical winning combinations
+    # @game_board.each_with_index do |itr, index|
+      # [0][0]  [1][0]  [2][0] -> 1,4,7
+      # [0][1]  [1][1]  [2][1] -> 2,5,8
+      # [0][2]  [1][2]  [2][2] -> 3,6,9
+    # end
     false
   end
 
