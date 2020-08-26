@@ -1,14 +1,9 @@
 require_relative '../lib/board.rb'
 
 class Game
-  attr_reader :winning_moves
-  attr_accessor :board_tic, :player1, :player2, :winner
+  attr_accessor :board_tic, :player1, :player2
 
   def initialize(player1, player2)
-    @winning_moves = [
-      [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7],
-      [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]
-    ]
     @board_tic = Board.new
     @player1 = player1
     @player2 = player2
