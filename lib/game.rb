@@ -1,5 +1,5 @@
 require_relative '../lib/board.rb'
-
+# rubocop: disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 class Game
   attr_accessor :board_tic, :player1, :player2
 
@@ -20,13 +20,13 @@ class Game
 
   def winner?(player)
     if [@board_tic.game_board[0][0], @board_tic.game_board[0][1], @board_tic.game_board[0][2]].all?(player.token) ||
-      [@board_tic.game_board[1][0], @board_tic.game_board[1][1], @board_tic.game_board[1][2]].all?(player.token) ||
-      [@board_tic.game_board[2][0], @board_tic.game_board[2][1], @board_tic.game_board[2][2]].all?(player.token) ||
-      [@board_tic.game_board[0][0], @board_tic.game_board[1][0], @board_tic.game_board[2][0]].all?(player.token) ||
-      [@board_tic.game_board[0][1], @board_tic.game_board[1][1], @board_tic.game_board[2][1]].all?(player.token) ||
-      [@board_tic.game_board[0][2], @board_tic.game_board[1][2], @board_tic.game_board[2][2]].all?(player.token) ||
-      [@board_tic.game_board[0][0], @board_tic.game_board[1][1], @board_tic.game_board[2][2]].all?(player.token) ||
-      [@board_tic.game_board[0][2], @board_tic.game_board[1][1], @board_tic.game_board[2][0]].all?(player.token)
+       [@board_tic.game_board[1][0], @board_tic.game_board[1][1], @board_tic.game_board[1][2]].all?(player.token) ||
+       [@board_tic.game_board[2][0], @board_tic.game_board[2][1], @board_tic.game_board[2][2]].all?(player.token) ||
+       [@board_tic.game_board[0][0], @board_tic.game_board[1][0], @board_tic.game_board[2][0]].all?(player.token) ||
+       [@board_tic.game_board[0][1], @board_tic.game_board[1][1], @board_tic.game_board[2][1]].all?(player.token) ||
+       [@board_tic.game_board[0][2], @board_tic.game_board[1][2], @board_tic.game_board[2][2]].all?(player.token) ||
+       [@board_tic.game_board[0][0], @board_tic.game_board[1][1], @board_tic.game_board[2][2]].all?(player.token) ||
+       [@board_tic.game_board[0][2], @board_tic.game_board[1][1], @board_tic.game_board[2][0]].all?(player.token)
       true
     end
   end
@@ -35,3 +35,4 @@ class Game
     @board_tic.slots_taken.size == 9 && !winner?(player)
   end
 end
+# rubocop: enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity

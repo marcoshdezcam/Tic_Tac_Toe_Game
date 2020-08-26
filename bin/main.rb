@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# rubocop: disable Style/Next
 require_relative '../lib/game.rb'
 
 puts %(First player; please type your name!)
@@ -30,3 +31,4 @@ loop do
     break
   end
 end
+# rubocop: enable Style/Next
