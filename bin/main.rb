@@ -17,7 +17,7 @@ loop do
   TicTacToe.board_tic.show_board
   if TicTacToe.winner?(player1) || TicTacToe.draw?(player1)
     puts %(Congratulations #{player1.name}, you won!) if TicTacToe.winner?(player1)
-    puts %(It's a draw!) if TicTacToe.draw?(player1)
+    puts %(It's a draw game!) if TicTacToe.draw?(player1)
     break
   end
 
