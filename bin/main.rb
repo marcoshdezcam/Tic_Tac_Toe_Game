@@ -7,8 +7,6 @@ player1 = Player.new(gets.chomp, 'X')
 puts %(Second player; please type your name!)
 player2 = Player.new(gets.chomp, 'O')
 TicTacToe = Game.new(player1, player2)
-puts %(Welcome #{TicTacToe.player1.name}! Your token is: #{TicTacToe.player1.token})
-puts %(Welcome #{TicTacToe.player2.name}! Your token is: #{TicTacToe.player2.token})
 
 loop do
   puts %(#{TicTacToe.player1.name}'s turn. Type a number between 1 and 9: )

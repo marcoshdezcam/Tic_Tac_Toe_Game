@@ -12,6 +12,11 @@ class Game
     ]
   end
 
+  def welcome
+    puts %(Welcome #{@board_tic.player1.name}! Your token is: #{@board_tic.player1.token})
+    puts %(Welcome #{@board_tic.player2.name}! Your token is: #{@board_tic.player2.token})
+  end
+
   def mark_board(player)
     return if @board_tic.marked?(player)
 
