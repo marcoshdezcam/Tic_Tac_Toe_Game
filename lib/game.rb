@@ -34,33 +34,27 @@ class Game
     puts %(Welcome #{@players[1].name}! Your token is: #{@players[1].token})
   end
 
-  def play
-    turn_number = 0
-    loop do
-      2.times do |i|
-        puts %(#{@players[i].name}'s turn. Type a number between 1 and 9. )
-        begin
-          new_move = gets.chomp.to_i
-          raise RuntimeError unless new_move.between?(1, 9)
-        rescue RuntimeError
-          puts %(Wrong number, please use a number between 1 and 9.)
-          retry
-        else
-          @players[i].next_move = new_move
-        ensure
-          turn_number += 1
-        end
+  def ask_moves
+    2.times do |i|
+      puts %(#{@players[i].name}'s turn. Type a number between 1 and 9. )
+      begin
+        new_move = gets.chomp.to_i
+        raise RuntimeError unless new_move.between?(1, 9)
+      rescue RuntimeError
+        puts %(Wrong number, please use a number between 1 and 9.)
+        retry
+      else
+        @players[i].next_move = new_move
+        @board_tic.mark_board(@players[i])
+        @board_tic.show_board
       end
     end
   end
 
-  def mark_board(player)
-    return if @board_tic.marked?(player)
-
-    @board_tic.game_board[0][player.next_move - 1] = player.token if player.next_move.between?(1, 3)
-    @board_tic.game_board[1][player.next_move - 4] = player.token if player.next_move.between?(4, 6)
-    @board_tic.game_board[2][player.next_move - 7] = player.token if player.next_move.between?(7, 9)
-    @board_tic.slots_taken << player.next_move && player.moves << player.next_move
+  def play
+    loop do
+      ask_moves
+    end
   end
 
   def winner?(player)
