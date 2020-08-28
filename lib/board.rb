@@ -13,7 +13,10 @@ class Board
   end
 
   def show_board
-    @game_board.each { |itr| puts %( | #{itr[0]} | | #{itr[1]} | | #{itr[2]} |) }
+    @game_board.each do |row|
+      row.each { |col| print %(| #{col} | ) }
+      puts %()
+    end
   end
 
   def mark_board(player)
