@@ -13,8 +13,8 @@ class Game
   end
 
   def welcome
-    puts %(Welcome #{@board_tic.player1.name}! Your token is: #{@board_tic.player1.token})
-    puts %(Welcome #{@board_tic.player2.name}! Your token is: #{@board_tic.player2.token})
+    puts %(Welcome #{@player1.name}! Your token is: #{@player1.token})
+    puts %(Welcome #{@player2.name}! Your token is: #{@player2.token})
   end
 
   def mark_board(player)
