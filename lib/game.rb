@@ -11,7 +11,7 @@ class Game
     ]
   end
 
-  def Game.validate_players
+  def self.validate_players
     new_players = Array.new(2)
     tokens = %w[X O]
     2.times do |i|
@@ -45,8 +45,10 @@ class Game
         retry
       else
         @players[i].next_move = new_move
+        redo if @board_tic.marked?(@players[i])
         @board_tic.mark_board(@players[i])
         @board_tic.show_board
+        winner?
       end
     end
   end
@@ -54,11 +56,19 @@ class Game
   def play
     loop do
       ask_moves
+      # winner? until turn_number.eql?(4)
+      # draw? until turn_number.eql?(8)
     end
   end
 
-  def winner?(player)
-    winning_moves.any?(player.moves)
+  def winner?
+    2.times do |i|
+      if winning_moves.any?(@players[i].moves)
+        puts %(#{@players[0].name} won!)
+        true
+      end
+    end
+    false
   end
 
   def draw?(player)
