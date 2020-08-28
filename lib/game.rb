@@ -2,14 +2,32 @@ require_relative '../lib/board.rb'
 class Game
   attr_reader :board_tic, :player1, :player2, :winning_moves
 
-  def initialize(player1, player2)
+  def initialize(players)
     @board_tic = Board.new
-    @player1 = player1
-    @player2 = player2
+    @player1 = players[0]
+    @player2 = players[1]
     @winning_moves = [
       [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7],
       [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]
     ]
+  end
+
+  def self.validate_players
+    players = Array.new(2)
+    tokens = %w[X O]
+    2.times do |i|
+      puts %(Player #{i + 1}, please type your name!)
+      begin
+        new_name = gets.chomp
+        raise RuntimeError if Player.validate_name(new_name).nil?
+      rescue RuntimeError
+        puts %(Invalid input! Please, try again.)
+        retry
+      else
+        players[i] = Player.new(new_name, tokens[i])
+      end
+    end
+    players
   end
 
   def welcome
