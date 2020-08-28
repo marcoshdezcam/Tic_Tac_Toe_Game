@@ -11,7 +11,7 @@ class Game
     ]
   end
 
-  def self.validate_players
+  def Game.validate_players
     new_players = Array.new(2)
     tokens = %w[X O]
     2.times do |i|
