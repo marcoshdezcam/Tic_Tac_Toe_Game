@@ -62,13 +62,16 @@ class Game
   end
 
   def winner?
-    2.times do |i|
-      if winning_moves.any?(@players[i].moves)
-        puts %(#{@players[0].name} won!)
-        true
-      end
+    if [@board_tic.game_board[0][0], @board_tic.game_board[0][1], @board_tic.game_board[0][2]].all?(player.token) ||
+       [@board_tic.game_board[1][0], @board_tic.game_board[1][1], @board_tic.game_board[1][2]].all?(player.token) ||
+       [@board_tic.game_board[2][0], @board_tic.game_board[2][1], @board_tic.game_board[2][2]].all?(player.token) ||
+       [@board_tic.game_board[0][0], @board_tic.game_board[1][0], @board_tic.game_board[2][0]].all?(player.token) ||
+       [@board_tic.game_board[0][1], @board_tic.game_board[1][1], @board_tic.game_board[2][1]].all?(player.token) ||
+       [@board_tic.game_board[0][2], @board_tic.game_board[1][2], @board_tic.game_board[2][2]].all?(player.token) ||
+       [@board_tic.game_board[0][0], @board_tic.game_board[1][1], @board_tic.game_board[2][2]].all?(player.token) ||
+       [@board_tic.game_board[0][2], @board_tic.game_board[1][1], @board_tic.game_board[2][0]].all?(player.token)
+      true
     end
-    false
   end
 
   def draw?(player)
