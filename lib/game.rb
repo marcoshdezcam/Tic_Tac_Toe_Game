@@ -1,11 +1,12 @@
 require_relative '../lib/board.rb'
 class Game
-  attr_reader :board, :players, :turn, :winner
+  attr_reader :board, :players, :winner, :draw
 
   def initialize(new_players)
     @board = Board.new
     @players = new_players
-    @turn = 0
+    @winner = nil
+    @draw = false
   end
 
   def self.validate_players
@@ -41,11 +42,7 @@ class Game
       retry
     else
       new_player.next_move = new_move
-      if @board.marked?(new_player)
-        ask_move(new_player)
-      else
-        @turn += 1
-      end
+      ask_move(new_player) if @board.marked?(new_player)
     end
   end
 
@@ -54,10 +51,8 @@ class Game
       ask_move(@players[i])
       @board.mark_board(@players[i])
       @board.show_board
-      if @turn >= 5 && winner?(@players[i]) || @turn.eql?(9) && draw?(@players[i])
-        @winner = @players[i]
-        break
-      end
+      break if @board.slots_taken.size >= 5 && winner?(@players[i])
+      break if @board.slots_taken.size.eql?(9) && draw?(@players[i])
     end
   end
 
@@ -65,19 +60,38 @@ class Game
     loop do
       move_players
       break unless @winner.nil?
+      break if @draw
     end
   end
 
   def winner?(player)
-    if [@board.game_board[0][0], @board.game_board[0][1], @board.game_board[0][2]].all?(player.token) ||
-       [@board.game_board[1][0], @board.game_board[1][1], @board.game_board[1][2]].all?(player.token) ||
-       [@board.game_board[2][0], @board.game_board[2][1], @board.game_board[2][2]].all?(player.token) ||
-       [@board.game_board[0][0], @board.game_board[1][0], @board.game_board[2][0]].all?(player.token) ||
+    if horizontal_win?(player) || vertical_win?(player) || diagonal_win?(player)
+      @winner = player
+      puts %(Congratulations #{player.name} you won!)
+      true
+    else
+      false
+    end
+  end
+
+  def horizontal_win?(player)
+    @board.game_board.each { |row| return true if row.all?(player.token) }
+    false
+  end
+
+  def vertical_win?(player)
+    if [@board.game_board[0][0], @board.game_board[1][0], @board.game_board[2][0]].all?(player.token) ||
        [@board.game_board[0][1], @board.game_board[1][1], @board.game_board[2][1]].all?(player.token) ||
-       [@board.game_board[0][2], @board.game_board[1][2], @board.game_board[2][2]].all?(player.token) ||
-       [@board.game_board[0][0], @board.game_board[1][1], @board.game_board[2][2]].all?(player.token) ||
+       [@board.game_board[0][2], @board.game_board[1][2], @board.game_board[2][2]].all?(player.token)
+      true
+    else
+      false
+    end
+  end
+
+  def diagonal_win?(player)
+    if [@board.game_board[0][0], @board.game_board[1][1], @board.game_board[2][2]].all?(player.token) ||
        [@board.game_board[0][2], @board.game_board[1][1], @board.game_board[2][0]].all?(player.token)
-      puts %(Congratulations #{player.name}! You won!)
       true
     else
       false
@@ -85,6 +99,6 @@ class Game
   end
 
   def draw?(player)
-    @board.slots_taken.size == 9 && !winner?(player)
+    @draw = true unless winner?(player)
   end
 end
