@@ -1,5 +1,5 @@
 class Player
-  attr_accessor :next_move, :moves
+  attr_accessor :next_move
   attr_reader :name, :token
 
   def initialize(name, token)
