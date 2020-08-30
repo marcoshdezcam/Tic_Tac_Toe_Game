@@ -1,5 +1,4 @@
 require_relative '../lib/player.rb'
-
 class Board
   attr_reader :game_board, :slots_taken
 
@@ -27,11 +26,6 @@ class Board
   end
 
   def marked?(player)
-    if @slots_taken.include?(player.next_move)
-      puts %(Slot taken. Select another.)
-      true
-    else
-      false
-    end
+    @slots_taken.include?(player.next_move)
   end
 end
