@@ -11,13 +11,6 @@ class Board
     @slots_taken = []
   end
 
-  def show_board
-    @game_board.each do |row|
-      row.each { |col| print %(| #{col} | ) }
-      puts %()
-    end
-  end
-
   def mark_board(player)
     @game_board[0][player.next_move - 1] = player.token if player.next_move.between?(1, 3)
     @game_board[1][player.next_move - 4] = player.token if player.next_move.between?(4, 6)

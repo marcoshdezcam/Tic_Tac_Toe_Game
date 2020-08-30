@@ -11,7 +11,6 @@ class Game
 
   def move_player(player)
     @board.mark_board(player)
-    @board.show_board
   end
 
   def winner?(player)

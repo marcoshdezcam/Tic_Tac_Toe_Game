@@ -42,10 +42,18 @@ def ask_move(player, board)
   end
 end
 
+def show_board(board)
+  board.game_board.each do |row|
+    row.each { |col| print %(| #{col} | ) }
+    puts %()
+  end
+end
+
 def play(game)
   2.times do |i|
     ask_move(game.players[i], game.board)
     game.move_player(game.players[i])
+    show_board(game.board)
     if game.board.slots_taken.size >= 5 && game.winner?(game.players[i])
       puts %(Congratulations! #{game.players[i].name} won!)
       break
