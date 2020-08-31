@@ -16,17 +16,18 @@
 - Use OOP
 
 ## Live Demo
-[Live preview:](https://repl.it/join/gjrzjjbm-marcoshdezcam1)
+[Live preview](https://gitpod.io/github.com/marcoshdezcam/Tic_Tac_Toe_Game/tree/feature_readme_game_instructions)
 
 ## Getting Started
 
 ### How to run the game?
 1 -> Clone this repo and open a terminal inside the folder where you extracted it.
-2 -> Run "ruby ./bin/main.rb" in your terminal
+
+2 -> Run "Run `./bin/main.rb`" in your terminal
 
 ### Game rules:
 - The game board is a 3x3 grid.
-- This first player will have the 'X' token and the second player the 'Y' token. 
+- This first player will have the 'X' token and the second player the 'O' token. 
 - The objective of the game is to complete a line with the player's token. These lines can be horizontal, vertical, or diagonal. And, a line is composed of 3 slots. 
 ```
   | X |  | X |  | X |       | O |  |   |  |   |       |   |  |   |  | X |
