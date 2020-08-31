@@ -8,7 +8,7 @@ def create_players
     puts %(Player #{i + 1}, please type your name!)
     begin
       new_name = gets.chomp
-      raise RuntimeError if Player.validate_name(new_name).nil?
+      raise RuntimeError if Player.validate_name(new_name).eql?(false)
     rescue RuntimeError
       puts %(Invalid name! Please, try again.)
       retry
@@ -20,23 +20,22 @@ def create_players
 end
 
 def welcome(new_players)
-  puts %(Welcome #{new_players[0].name}! Your token is: #{new_players[0].token})
-  puts %(Welcome #{new_players[1].name}! Your token is: #{new_players[1].token})
+  new_players.each { |player| puts %(Welcome #{player.name}! Your token is: #{player.token}) }
   new_players
 end
 
 def ask_move(player, board)
-  puts %(#{player.name}'s turn. Type a number between 1 and 9. )
+  puts %(#{player.name} is your turn. Type a number between 1 and 9. )
   begin
     new_move = gets.chomp.to_i
     raise RuntimeError unless new_move.between?(1, 9)
   rescue RuntimeError
-    puts %(Wrong number, please use a number between 1 and 9.)
+    puts %(Wrong number, please choose one between 1 and 9.)
     retry
   else
     player.next_move = new_move
     if board.marked?(player)
-      puts %(Slot taken, choose a different number)
+      puts %(Slot is taken, choose a different number)
       ask_move(player)
     end
   end
@@ -52,10 +51,10 @@ end
 def play(game)
   2.times do |i|
     ask_move(game.players[i], game.board)
-    game.move_player(game.players[i])
+    game.board.mark_board(game.players[i])
     show_board(game.board)
     if game.board.slots_taken.size >= 5 && game.winner?(game.players[i])
-      puts %(Congratulations! #{game.players[i].name} won!)
+      puts %(Congratulations #{game.players[i].name}! You won!)
       break
     end
     if game.board.slots_taken.size.eql?(9) && game.draw?(game.players[i])

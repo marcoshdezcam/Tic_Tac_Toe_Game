@@ -9,10 +9,6 @@ class Game
     @draw = false
   end
 
-  def move_player(player)
-    @board.mark_board(player)
-  end
-
   def winner?(player)
     if horizontal_win?(player) || vertical_win?(player) || diagonal_win?(player)
       @winner = true
@@ -28,13 +24,8 @@ class Game
   end
 
   def vertical_win?(player)
-    if [@board.game_board[0][0], @board.game_board[1][0], @board.game_board[2][0]].all?(player.token) ||
-       [@board.game_board[0][1], @board.game_board[1][1], @board.game_board[2][1]].all?(player.token) ||
-       [@board.game_board[0][2], @board.game_board[1][2], @board.game_board[2][2]].all?(player.token)
-      true
-    else
-      false
-    end
+    @board.game_board.transpose.each { |col| return true if col.all?(player.token) }
+    false
   end
 
   def diagonal_win?(player)
