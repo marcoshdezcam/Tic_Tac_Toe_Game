@@ -36,7 +36,7 @@ def ask_move(player, board)
     player.next_move = new_move
     if board.marked?(player)
       puts %(Slot is taken, choose a different number)
-      ask_move(player)
+      ask_move(player, board)
     end
   end
 end
