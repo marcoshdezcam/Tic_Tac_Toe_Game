@@ -23,7 +23,7 @@
 ### How to run the game?
 1 -> Clone this repo and open a terminal inside the folder where you extracted it.
 
-2 -> Run "Run `./bin/main.rb`" in your terminal
+2 -> Run `./bin/main.rb` in your terminal
 
 ### Game rules:
 - The game board is a 3x3 grid.
